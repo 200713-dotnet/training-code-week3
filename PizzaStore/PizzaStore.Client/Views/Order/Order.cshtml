@@ -1,0 +1,59 @@
+@model PizzaStore.Client.Models.PizzaViewModel
+
+@* HTML WAY *@
+<form action="/order/placeorder" method="post">
+  @foreach (var crust in @Model.Crusts)
+  {
+    <input type="radio" name="crust" value="@crust.Name">
+  }
+
+  <select name="size" id="">
+    @foreach (var size in @Model.Sizes)
+    {
+      <option value="@size.Name">@size.Name</option>
+    }
+  </select>
+
+  @foreach (var topping in @Model.Toppings)
+  {
+    <input type="checkbox" name="selectedtoppings" value="@topping.Name">
+  }
+
+  <input type="submit" value="place order">
+  <button type="submit">place order</button>
+</form>
+
+@* HTML HELPER WAY *@
+@using(Html.BeginForm("PlaceOrder", "Order", null, FormMethod.Post))
+{
+  foreach (var crust in Model.Crusts)
+  {
+    Html.RadioButtonFor(m => m.Crust, crust.Name);
+  }
+
+  Html.DropDownListFor(m => m.Size, new SelectList(Model.Sizes));
+
+  foreach (var topping in Model.Toppings)
+  {
+    Html.CheckBoxFor(m => m.SelectedTopping, new { name = "SelectedToppings", value = topping });
+  }
+  
+  <button type="submit">place order</button>
+}
+
+@* TAG HELPER WAY *@
+<form asp-action="placeorder" method="post">
+  @foreach (var crust in @Model.Crusts)
+  {
+    <input type="radio" asp-for="@Model.Crust" value="@crust.Name">
+  }
+
+  <select asp-for="@Model.Size">
+    @foreach (var size in @Model.Sizes)
+    {
+      <option value="@size.Name">@size.Name</option>
+    }
+  </select>
+
+  <button type="submit">place order</button>
+</form>
