@@ -1,0 +1,26 @@
+@* strong-typed view *@
+
+@model IEnumerable<PizzaStore.Domain.Models.PizzaModel>
+
+@{
+  if (DateTime.Now.Month == 9)
+  {
+    Layout = "_AugustLayout";
+  } 
+}
+
+<h2>Pizza List</h2>
+<ul>
+  @foreach (var p in @Model)
+  {
+    <li>@p</li>
+  }
+</ul>
+
+CreatePizza
+
+<form action=""> PizzaViewModel
+  display the crusts
+  display the sizes
+  display the toppings
+</form>

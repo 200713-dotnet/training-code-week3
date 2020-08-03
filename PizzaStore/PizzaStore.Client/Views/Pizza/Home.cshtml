@@ -1,0 +1,16 @@
+@* weak-typed view *@
+
+@{
+  if (DateTime.Now.Month == 9)
+  {
+    Layout = "_AugustLayout";
+  } 
+}
+
+<h2>Pizza List</h2>
+<ul>
+  @foreach (var p in @ViewBag.PizzaList)
+  {
+    <li>@p</li>
+  }
+</ul>
