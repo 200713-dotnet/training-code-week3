@@ -23,6 +23,7 @@ namespace PizzaStore.Client.Controllers
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult PlaceOrder(PizzaViewModel pizzaViewModel) //model binding
     {
       if (ModelState.IsValid) //  what is the validation? (add to viewmodel)

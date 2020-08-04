@@ -14,12 +14,19 @@ namespace PizzaStore.Client.Models
 
 
     // in from the client
+    [Required(ErrorMessage = "Better select Crust")]
+    public string Crust { get; set; }
     [Required]
-    public CrustModel Crust { get; set; }
-    [Required]
-    public SizeModel Size { get; set; }
+    public string Size { get; set; }
     [Range(2,5)]
-    public List<ToppingModel> SelectedToppings { get; set; }
+    public List<string> SelectedToppings { get; set; }
     public bool SelectedTopping { get; set; }
+
+    public PizzaViewModel()
+    {
+      Crusts = new List<CrustModel>() { new CrustModel() { Name = "Chicago" }};
+      Sizes = new List<SizeModel>() { new SizeModel() { Name = "Medium" }};
+      Toppings = new List<ToppingModel>() { new ToppingModel(){ Name = "Pepperoni" }};
+    }
   }
 }

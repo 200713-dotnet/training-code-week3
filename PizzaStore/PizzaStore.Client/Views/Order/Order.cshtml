@@ -1,10 +1,18 @@
 @model PizzaStore.Client.Models.PizzaViewModel
 
+@* security measures
+
+CORS = cross-origin resource sharing
+XSS = cross-site scripting
+CSRF* = cross-site request forgery *@
+
 @* HTML WAY *@
 <form action="/order/placeorder" method="post">
   @foreach (var crust in @Model.Crusts)
   {
-    <input type="radio" name="crust" value="@crust.Name">
+    <input type="radio" name="crust" id="crust" value="@crust.Name" data-val="true" data-val-required="Needed">
+    <label for="crust">@crust.Name</label>
+    @Html.ValidationMessageFor(m => m.Crust)
   }
 
   <select name="size" id="">
@@ -13,10 +21,13 @@
       <option value="@size.Name">@size.Name</option>
     }
   </select>
+  @Html.ValidationMessageFor(m => m.Size)
 
   @foreach (var topping in @Model.Toppings)
   {
-    <input type="checkbox" name="selectedtoppings" value="@topping.Name">
+    <input type="checkbox" name="selectedtoppings" id="selectedtoppings" value="@topping.Name">
+    <label for="selectedtoppings">@topping.Name</label>
+    @Html.ValidationMessageFor(m => m.SelectedToppings)
   }
 
   <input type="submit" value="place order">
@@ -26,16 +37,20 @@
 @* HTML HELPER WAY *@
 @using(Html.BeginForm("PlaceOrder", "Order", null, FormMethod.Post))
 {
+  @Html.AntiForgeryToken();
   foreach (var crust in Model.Crusts)
   {
-    Html.RadioButtonFor(m => m.Crust, crust.Name);
+    @Html.RadioButtonFor(m => m.Crust, crust.Name);
+    @Html.LabelFor(m => m.Crust);
+    @Html.ValidationMessageFor(m => m.Crust)
   }
 
-  Html.DropDownListFor(m => m.Size, new SelectList(Model.Sizes));
+  @Html.DropDownListFor(m => m.Size, new SelectList(Model.Sizes));
+
 
   foreach (var topping in Model.Toppings)
   {
-    Html.CheckBoxFor(m => m.SelectedTopping, new { name = "SelectedToppings", value = topping });
+    @Html.CheckBoxFor(m => m.SelectedTopping, new { name = "SelectedToppings", value = topping });
   }
   
   <button type="submit">place order</button>
