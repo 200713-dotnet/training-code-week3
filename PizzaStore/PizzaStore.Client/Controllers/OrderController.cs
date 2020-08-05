@@ -19,7 +19,7 @@ namespace PizzaStore.Client.Controllers
     {
       _db = dbContext;
     }
-
+    
     public IActionResult Start()
     {
       return View("Order", new PizzaViewModel());

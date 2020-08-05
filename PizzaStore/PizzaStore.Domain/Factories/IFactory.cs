@@ -1,7 +1,9 @@
+using PizzaStore.Domain.Models;
+
 namespace PizzaStore.Domain.Factories
 {
-  public interface IFactory<T> where T : class, new()
+  public interface IFactory
   {
-    T Create();
+    AModel Create();
   }
 }

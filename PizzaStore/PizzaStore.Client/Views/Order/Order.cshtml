@@ -47,9 +47,10 @@ CSRF* = cross-site request forgery, phishing *@
 
   @Html.DropDownListFor(m => m.Size, new SelectList(Model.Sizes));
 
-  foreach (var topping in Model.SelectedToppings2)
+  foreach (var topping in Model.Toppings2)
   {
-    @Html.CheckBoxFor(m => topping.IsSelected, new { value = topping.Name });
+    @Html.CheckBoxFor(m => topping.IsSelected, new { name = "selectedtoppings2", value = topping.Text });
+    @Html.HiddenFor(m => m.SelectedToppings2)
   }
   
   <button type="submit">place order</button>

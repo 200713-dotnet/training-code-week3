@@ -3,9 +3,9 @@ using PizzaStore.Domain.Models;
 
 namespace PizzaStore.Domain.Factories
 {
-  public class PizzaFactory : IFactory<PizzaModel>
+  public class PizzaFactory : IFactory
   {
-    public PizzaModel Create()
+    public AModel Create()
     {
       var p = new PizzaModel();
 

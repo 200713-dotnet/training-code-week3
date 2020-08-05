@@ -11,6 +11,7 @@ namespace PizzaStore.Client.Models
     public List<CrustModel> Crusts { get; set; }
     public List<SizeModel> Sizes { get; set; }
     public List<ToppingModel> Toppings { get; set; }
+    public List<CheckBoxTopping> Toppings2 { get; set; }
 
 
     // in from the client
@@ -20,13 +21,14 @@ namespace PizzaStore.Client.Models
     public string Size { get; set; }
     [Range(2,5)]
     public List<string> SelectedToppings { get; set; }
-    public List<CheckBoxTopping> SelectedToppings2 { get; set; }
+    public List<string> SelectedToppings2 { get; set; }
 
     public PizzaViewModel()
     {
       Crusts = new List<CrustModel>() { new CrustModel() { Name = "Chicago" }};
       Sizes = new List<SizeModel>() { new SizeModel() { Name = "Medium" }};
       Toppings = new List<ToppingModel>() { new ToppingModel(){ Name = "Pepperoni" }};
+      SelectedToppings2 = new List<CheckBoxTopping>() {}
     }
   }
 
