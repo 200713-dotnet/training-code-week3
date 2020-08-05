@@ -20,7 +20,7 @@ namespace PizzaStore.Client.Models
     public string Size { get; set; }
     [Range(2,5)]
     public List<string> SelectedToppings { get; set; }
-    public bool SelectedTopping { get; set; }
+    public List<CheckBoxTopping> SelectedToppings2 { get; set; }
 
     public PizzaViewModel()
     {
@@ -28,5 +28,11 @@ namespace PizzaStore.Client.Models
       Sizes = new List<SizeModel>() { new SizeModel() { Name = "Medium" }};
       Toppings = new List<ToppingModel>() { new ToppingModel(){ Name = "Pepperoni" }};
     }
+  }
+
+  public class CheckBoxTopping : ToppingModel
+  {
+    public string Text { get; set; }
+    public bool IsSelected { get; set; }
   }
 }

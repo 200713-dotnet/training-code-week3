@@ -2,5 +2,7 @@
 bin/
 obj/
 
+appsettings*.json
+
 # node
 node_modules/

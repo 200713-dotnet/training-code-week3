@@ -2,9 +2,9 @@
 
 @* security measures
 
-CORS = cross-origin resource sharing
-XSS = cross-site scripting
-CSRF* = cross-site request forgery *@
+CORS = cross-origin resource sharing, ability to share between domains
+XSS = cross-site scripting, man-in-the-middle
+CSRF* = cross-site request forgery, phishing *@
 
 @* HTML WAY *@
 <form action="/order/placeorder" method="post">
@@ -47,10 +47,9 @@ CSRF* = cross-site request forgery *@
 
   @Html.DropDownListFor(m => m.Size, new SelectList(Model.Sizes));
 
-
-  foreach (var topping in Model.Toppings)
+  foreach (var topping in Model.SelectedToppings2)
   {
-    @Html.CheckBoxFor(m => m.SelectedTopping, new { name = "SelectedToppings", value = topping });
+    @Html.CheckBoxFor(m => topping.IsSelected, new { value = topping.Name });
   }
   
   <button type="submit">place order</button>
@@ -70,5 +69,18 @@ CSRF* = cross-site request forgery *@
     }
   </select>
 
+  @foreach (var topping in @Model.Toppings)
+  {
+    <input type="checkbox" name="selectedtoppings" id="selectedtoppings" asp-for="selectedtoppings" value="@topping.Name">
+    <label for="selectedtoppings">@topping.Name</label>
+    <span asp-validation-for=""></span>
+  }
+
   <button type="submit">place order</button>
 </form>
+
+@* linking *@
+
+<a href="/user/index">user homepage</a>
+@Html.ActionLink("user page", "index", "user")
+<a asp-controller="user" asp-action="index">user page</a>
